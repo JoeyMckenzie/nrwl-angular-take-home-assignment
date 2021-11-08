@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { EffectsModule } from '@ngrx/effects';
 import { provideMockStore } from '@ngrx/store/testing';
 import { UsersFacade } from '@users';
 import { initialUsersState, MockUsersFacade } from 'src/app/users/+state';
@@ -18,8 +19,6 @@ describe('TicketListComponent', () => {
       imports: [FormsModule],
       declarations: [TicketListComponent],
       providers: [
-        provideMockStore({ initialState: initialTicketsState }),
-        provideMockStore({ initialState: initialUsersState }),
         {
           provide: TicketsFacade,
           useClass: MockTicketsFacade
@@ -42,7 +41,19 @@ describe('TicketListComponent', () => {
   });
 
   it('should create', () => {
-    // Act/Assert
     expect(component).toBeTruthy();
+  });
+
+  it('should fire the request to load users and tickets on mount', () => {
+    // Arrange
+    const usersFacadeSpy = spyOn(usersFacade, 'loadUsers');
+    const ticketsFacadeSpy = spyOn(ticketsFacade, 'loadTickets');
+
+    // Act
+    component.ngOnInit();
+
+    // Assert
+    expect(usersFacadeSpy).toHaveBeenCalledTimes(1);
+    expect(ticketsFacadeSpy).toHaveBeenCalledTimes(1);
   });
 });

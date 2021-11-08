@@ -7,6 +7,9 @@ export const selectAvailableTickets = createSelector(ticketsFeatureSelector, sta
 
 export const selectFilteredTickets = createSelector(ticketsFeatureSelector, state => state.filteredTickets);
 
-export const selectCurrentTicket = createSelector(ticketsFeatureSelector, state => state.currentTicket);
+export const selectCurrentTicket = createSelector(ticketsFeatureSelector, state => {
+  console.log(state.currentTicket);
+  return state.currentTicket;
+});
 
 export const selectLoading = createSelector(ticketsFeatureSelector, state => state.loading);
