@@ -56,4 +56,28 @@ describe('TicketListComponent', () => {
     expect(usersFacadeSpy).toHaveBeenCalledTimes(1);
     expect(ticketsFacadeSpy).toHaveBeenCalledTimes(1);
   });
+
+  it('should fire the request to create a ticket if the form is valid', () => {
+    // Arrange
+    const ticketsFacadeSpy = spyOn(ticketsFacade, 'addTicket');
+    spyOnProperty(component, 'formIsValid', 'get').and.returnValue(true);
+
+    // Act
+    component.createTicket();
+
+    // Assert
+    expect(ticketsFacadeSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('should not fire the request to create a ticket if the form is invalid', () => {
+    // Arrange
+    const ticketsFacadeSpy = spyOn(ticketsFacade, 'addTicket');
+    spyOnProperty(component, 'formIsValid', 'get').and.returnValue(false);
+
+    // Act
+    component.createTicket();
+
+    // Assert
+    expect(ticketsFacadeSpy).not.toHaveBeenCalled();
+  });
 });
