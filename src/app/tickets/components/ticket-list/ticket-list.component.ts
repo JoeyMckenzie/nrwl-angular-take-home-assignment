@@ -7,18 +7,17 @@ import { TicketsFacade } from '../../+state';
 
 @Component({
   selector: 'app-ticket-list',
-  templateUrl: './ticket-list.component.html',
-  styleUrls: ['./ticket-list.component.css']
+  templateUrl: './ticket-list.component.html'
 })
 export class TicketListComponent implements OnInit, OnDestroy {
-  private readonly unsubscribe$ = new Subject();
-
   ticketDescription = '';
   assignedUserId?: number;
   tickets$ = this.ticketsFacade.availableTickets$;
   users$ = this.usersFacade.availableUsers$;
   loadingTickets$ = this.ticketsFacade.loadingTickets$;
   loadingUsers$ = this.usersFacade.loadingUsers$;
+
+  private readonly unsubscribe$ = new Subject();
 
   get formIsValid(): boolean {
     return this.ticketDescription !== '' && !isNullOrUndefined(this.assignedUserId);

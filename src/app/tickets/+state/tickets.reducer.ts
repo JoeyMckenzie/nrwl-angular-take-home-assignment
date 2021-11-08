@@ -12,7 +12,7 @@ export interface TicketsState {
   currentError?: Maybe<string>;
 }
 
-const initialTicketState: TicketsState = {
+export const initialTicketsState: TicketsState = {
   availableTickets: [],
   filteredTickets: [],
   loading: false
@@ -30,7 +30,7 @@ const setStateWithError = (state: TicketsState, { error }: FailureAction): Ticke
 });
 
 const ticketsReducer = createReducer(
-  initialTicketState,
+  initialTicketsState,
   on(fromActions.loadTickets, state => ({
     ...state,
     loading: true

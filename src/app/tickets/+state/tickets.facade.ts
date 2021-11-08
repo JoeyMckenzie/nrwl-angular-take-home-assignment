@@ -13,7 +13,7 @@ export class TicketsFacade implements OnDestroy {
   currentTicket$ = this.store.select(fromSelectors.selectCurrentTicket);
   loadingTickets$ = this.store.select(fromSelectors.selectLoading);
 
-  readonly unsubscribe$ = new Subject();
+  private readonly unsubscribe$ = new Subject();
 
   constructor(private store: Store<TicketsState>) {}
 

@@ -10,7 +10,7 @@ export interface UsersState extends SharedState {
   currentUser?: Maybe<User>;
 }
 
-const initialUserState: UsersState = {
+export const initialUsersState: UsersState = {
   availableUsers: [],
   loading: false
 };
@@ -24,7 +24,7 @@ const setStateWithError = (state: UsersState, { error }: FailureAction): UsersSt
 });
 
 const usersReducer = createReducer(
-  initialUserState,
+  initialUsersState,
   on(fromActions.loadUsers, state => ({
     ...state,
     loading: true

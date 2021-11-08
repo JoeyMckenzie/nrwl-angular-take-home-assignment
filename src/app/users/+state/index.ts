@@ -1,2 +1,3 @@
 export { UsersFacade } from './users.facade';
-export { usersFeatureKey, reducer } from './users.reducer';
+export { usersFeatureKey, reducer, initialUsersState } from './users.reducer';
+export { MockUsersFacade } from './mock-users.facade';

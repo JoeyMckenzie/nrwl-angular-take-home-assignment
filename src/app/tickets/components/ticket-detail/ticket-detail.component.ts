@@ -8,8 +8,7 @@ import { TicketsFacade } from '../../+state';
 
 @Component({
   selector: 'app-ticket-detail',
-  templateUrl: './ticket-detail.component.html',
-  styleUrls: ['./ticket-detail.component.css']
+  templateUrl: './ticket-detail.component.html'
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
   ticket$ = this.ticketsFacade.currentTicket$;

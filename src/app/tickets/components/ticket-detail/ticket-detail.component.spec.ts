@@ -1,10 +1,11 @@
 import { RouterTestingModule } from '@angular/router/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MockStore } from '@ngrx/store/testing';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { UsersFacade } from '@users';
-import { TicketsFacade } from '../../+state';
+import { initialTicketsState, MockTicketsFacade, TicketsFacade } from '../../+state';
 
 import { TicketDetailComponent } from './ticket-detail.component';
+import { initialUsersState, MockUsersFacade } from 'src/app/users/+state';
 
 describe('TicketDetailComponent', () => {
   let component: TicketDetailComponent;
@@ -17,13 +18,15 @@ describe('TicketDetailComponent', () => {
       imports: [RouterTestingModule],
       declarations: [TicketDetailComponent],
       providers: [
-        {
-          provide: UsersFacade,
-          useValue: MockStore
-        },
+        provideMockStore({ initialState: initialTicketsState }),
+        provideMockStore({ initialState: initialUsersState }),
         {
           provide: TicketsFacade,
-          useValue: MockStore
+          useClass: MockTicketsFacade
+        },
+        {
+          provide: UsersFacade,
+          useClass: MockUsersFacade
         }
       ]
     }).compileComponents();
