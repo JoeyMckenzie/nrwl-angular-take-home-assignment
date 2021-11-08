@@ -11,10 +11,19 @@ import { TicketsFacade } from '../../+state';
   templateUrl: './ticket-detail.component.html'
 })
 export class TicketDetailComponent implements OnInit, OnDestroy {
+  private _ticketCompleteStatus = false;
+
   ticket$ = this.ticketsFacade.currentTicket$;
   user$ = this.usersFacade.currentUser$;
   loadingTicket$ = this.ticketsFacade.loadingTickets$;
-  ticketCompleteStatus = false;
+
+  get ticketCompleteStatus() {
+    return this._ticketCompleteStatus;
+  }
+
+  set ticketCompleteStatus(status: boolean) {
+    this._ticketCompleteStatus = status;
+  }
 
   private readonly unsubscribe$ = new Subject();
 
@@ -30,6 +39,7 @@ export class TicketDetailComponent implements OnInit, OnDestroy {
 
     if (isNaN(parsedTicketNumber)) {
       this.router.navigateByUrl('/');
+      return;
     }
 
     this.ticketsFacade.loadTicket(parsedTicketNumber);
