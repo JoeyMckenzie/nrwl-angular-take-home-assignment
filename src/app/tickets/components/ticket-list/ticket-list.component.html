@@ -1,0 +1,37 @@
+<h2>Tickets</h2>
+
+<p>Loading tickets: {{ loadingTickets$ | async }}</p>
+<p>Loading users: {{ loadingUsers$ | async }}</p>
+
+<ul>
+  <li *ngFor="let t of tickets$ | async">
+    Ticket: {{t.id}}, <a [routerLink]="getTicketLink(t.id)">{{t.description}}</a>
+  </li>
+</ul>
+
+<!-- Normally, I'd leverage reactive forms, but for the sake of simplicity, let's assume our users know what they're doing -->
+<div>
+  <h4>Create a ticket</h4>
+
+  <label for="ticket-description">Description</label>
+  <br />
+  <input id="ticket-description" placeholder="Do take home assignment" [(ngModel)]="ticketDescription" />
+
+  <br />
+  <br />
+
+  <label for="ticket-asignee">Assignee</label>
+  <br />
+  <select id="ticket-asignee" [(ngModel)]="assignedUserId">
+    <option disabled selected>Select a user</option>
+    <option *ngFor="let user of users$ | async" [value]="user.id">
+      {{ user.name }}
+    </option>
+  </select>
+
+  <br />
+  <br />
+  <button type="button"
+    [disabled]="!formIsValid || (loadingTickets$ | async) === true || (loadingUsers$ | async) === true"
+    (click)="createTicket()">Create</button>
+</div>

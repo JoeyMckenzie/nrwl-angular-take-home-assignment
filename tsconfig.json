@@ -11,13 +11,19 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2015",
-    "lib": [
-      "es2018",
-      "dom"
-    ]
+    "strict": true,
+    "lib": ["es2018", "dom"],
+    "paths": {
+      "@types": ["src/app/types/index.ts"],
+      "@shared": ["src/app/shared/index.ts"],
+      "@utilities": ["src/app/utilities/index.ts"],
+      "@tickets": ["src/app/tickets/index.ts"],
+      "@users": ["src/app/users/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "strictTemplates": true
   }
 }

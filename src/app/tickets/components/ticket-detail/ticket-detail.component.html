@@ -1,0 +1,11 @@
+<div>
+  <a routerLink="/">Back</a>
+  <p>Loading: {{ loadingTicket$ | async }} </p>
+  <p><strong>Ticket</strong>: {{ (ticket$ | async)?.description }}</p>
+  <p><strong>Assignee</strong>: {{ (user$ | async)?.id }}</p>
+  <div>
+    <p><strong>Complete</strong>:
+      <input type="checkbox" [checked]="ticketCompleteStatus" (change)="updateTicketStatus()">
+    </p>
+  </div>
+</div>
